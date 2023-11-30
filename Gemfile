@@ -44,6 +44,9 @@ gem "bootsnap", require: false
 # Ues Devise for authentication
 gem 'devise'
 
+# Use HTTParty for API calls
+gem 'httparty'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
