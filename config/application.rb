@@ -23,5 +23,9 @@ module AIclinix
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # Set UUID as Default Primary Key
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
