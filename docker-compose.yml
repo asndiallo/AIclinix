@@ -1,0 +1,10 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: aiclinix_development
+      POSTGRES_USER: aiclinix
+      POSTGRES_PASSWORD: password
