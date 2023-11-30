@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_125725) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_131458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "heart_disease_predictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "patient_id", null: false
+    t.integer "prediction"
+    t.datetime "prediction_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_heart_disease_predictions_on_patient_id"
+  end
+
+  create_table "patients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "gender"
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
+  end
+
+  create_table "recommendations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "heart_disease_prediction_id", null: false
+    t.text "recommendation_text"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["heart_disease_prediction_id"], name: "index_recommendations_on_heart_disease_prediction_id"
+  end
+
+  create_table "shap_values", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "heart_disease_prediction_id", null: false
+    t.string "feature_name"
+    t.float "shap_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["heart_disease_prediction_id"], name: "index_shap_values_on_heart_disease_prediction_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +65,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_125725) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "heart_disease_predictions", "patients"
+  add_foreign_key "patients", "users"
+  add_foreign_key "recommendations", "heart_disease_predictions"
+  add_foreign_key "shap_values", "heart_disease_predictions"
 end
