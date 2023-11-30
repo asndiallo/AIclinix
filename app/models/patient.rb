@@ -1,3 +1,8 @@
+# frozen_string_literal: true
+
+# Purpose: Patient model
 class Patient < ApplicationRecord
   belongs_to :user
+
+  has_many :heart_disease_predictions, dependent: :destroy
 end
