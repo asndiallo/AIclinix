@@ -2,8 +2,10 @@
 
 # Purpose: Patient model
 class Patient < ApplicationRecord
-  enum sex: { male: 'male', female: 'female' }
+  extend Enumerize
   belongs_to :user
 
   has_many :heart_disease_predictions, dependent: :destroy
+
+  enumerize :sex, in: %i[male female], predicates: true
 end

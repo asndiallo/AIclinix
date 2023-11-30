@@ -29,3 +29,22 @@
 
 en:
   hello: "Hello world"
+  enumerize:
+    patient_record:
+      chest_pain_type:
+        typical_angina: "Typical Angina"
+        atypical_angina: "Atypical Angina"
+        non_anginal_pain: "Non-Anginal Pain"
+        asymptomatic: "Asymptomatic"
+      resting_electrocardiographic_results:
+        normal: "Normal"
+        st_t_wave_abnormality: "Having ST-T wave abnormality"
+        left_ventricular_hypertrophy: "Showing probable or definite left ventricular hypertrophy"
+      slope:
+        upsloping: "Upsloping"
+        flat: "Flat"
+        downsloping: "Downsloping"
+      thalassemia:
+        fixed_defect: "Fixed Defect"
+        normal: "Normal"
+        reversible_defect: "Reversible Defect"

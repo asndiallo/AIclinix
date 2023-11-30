@@ -1,0 +1,20 @@
+fr:
+  enumerize:
+    patient_record:
+      chest_pain_type:
+        typical_angina: "Angine typique"
+        atypical_angina: "Angine atypique"
+        non_anginal_pain: "Douleur non angineuse"
+        asymptomatic: "Asymptomatique"
+      resting_electrocardiographic_results:
+        normal: "Normal"
+        st_t_wave_abnormality: "Présence d'une anomalie de l'onde ST-T"
+        left_ventricular_hypertrophy: "Hypertrophie ventriculaire gauche probable ou définitive"
+      slope:
+        upsloping: "En pente ascendante"
+        flat: "Plat"
+        downsloping: "En pente descendante"
+      thalassemia:
+        fixed_defect: "Défaut fixe"
+        normal: "Normal"
+        reversible_defect: "Défaut réversible"
