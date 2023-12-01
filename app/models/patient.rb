@@ -18,5 +18,16 @@ class Patient < ApplicationRecord
   extend Enumerize
   belongs_to :user
 
+  has_many :patient_records, dependent: :destroy
   has_many :heart_disease_predictions, dependent: :destroy
+
+  # Enumerations
+  enumerize :sex, in: [:male, :female], predicates: true, scope: true
+
+  def age
+    return unless date_of_birth
+
+    now = Time.zone.now.to_date
+    now.year - date_of_birth.year - (date_of_birth.to_date.change(year: now.year) > now ? 1 : 0)
+  end
 end
