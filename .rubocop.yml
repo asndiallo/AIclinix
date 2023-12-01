@@ -1,0 +1,60 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/**/*
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - db/**/*
+Lint/MissingSuper:
+  Exclude:
+    - app/services/**/*
+Metrics/AbcSize:
+  Max: 19
+  Exclude:
+    - spec/**/*
+Metrics/BlockLength:
+  Max: 200
+  Exclude:
+    - spec/**/*
+    - db/**/*
+    - lib/rails_admin/**/*
+    - config/initializers/**/*
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 15
+Metrics/ModuleLength:
+  Max: 200
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - db/**/*
+Style/NumericLiterals:
+  Exclude:
+    - db/**/*
+Style/StringLiterals:
+  Exclude:
+    - bin/*
+    - db/**/*
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/WordArray:
+  EnforcedStyle: brackets
+
+RSpec/MultipleExpectations:
+  Max: 3
+RSpec/MultipleMemoizedHelpers:
+  Max: 8
+RSpec/ExampleLength:
+  Max: 15
+RSpec/RepeatedExample:
+  Enabled: false
