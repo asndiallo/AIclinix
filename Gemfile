@@ -67,6 +67,9 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
 
+  # Use annotate to annotate models, routes, fixtures, and others
+  gem 'annotate'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
