@@ -39,9 +39,8 @@ class HeartDiseaseApiService
 
   def self.create_prediction_record(patient_record, parsed_response)
     HeartDiseasePrediction.create!(
-      patient:         patient_record.patient,
-      prediction:      parsed_response['prediction'],
-      prediction_date: Time.zone.now
+      patient:    patient_record.patient,
+      prediction: parsed_response['prediction']
     )
   end
 
@@ -57,8 +56,7 @@ class HeartDiseaseApiService
   def self.store_recommendations(prediction, recommendations)
     recommendations.each do |key, _text|
       prediction.recommendations.create!(
-        recommendation_key: key.to_s,
-        language:           I18n.locale.to_s
+        recommendation_key: key.to_s
       )
     end
   end

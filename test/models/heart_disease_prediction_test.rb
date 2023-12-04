@@ -4,12 +4,11 @@
 #
 # Table name: heart_disease_predictions
 #
-#  id              :uuid             not null, primary key
-#  patient_id      :uuid             not null
-#  prediction      :integer
-#  prediction_date :datetime
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id         :uuid             not null, primary key
+#  patient_id :uuid             not null
+#  prediction :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 require 'test_helper'
 
