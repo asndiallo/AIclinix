@@ -1,0 +1,30 @@
+.field,
+.actions {
+  margin-top: 20px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.actions input[type='submit'] {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actions input[type='submit']:hover {
+  background-color: #004494;
+}
