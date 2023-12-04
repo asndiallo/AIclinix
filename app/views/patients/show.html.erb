@@ -1,0 +1,11 @@
+<h1>Patient Details</h1>
+<div class="patient-details">
+  <p><strong>First Name:</strong> <%= @patient.first_name %></p>
+  <p><strong>Last Name:</strong> <%= @patient.last_name %></p>
+  <p><strong>Age:</strong><%= @patient.age %></p>
+  <p><strong>Date of Birth:</strong> <%= @patient.date_of_birth %></p>
+  <p><strong>Gender:</strong> <%= @patient.sex %></p>
+  <p><strong>Managed by:</strong> <%= @patient.user.email %></p>
+  <%= link_to 'Edit Patient', edit_patient_path(@patient) %> |
+  <%= link_to 'Back to Patients', patients_path %>
+</div>
