@@ -16,4 +16,7 @@ class HeartDiseasePrediction < ApplicationRecord
 
   has_many :shap_values, dependent: :destroy
   has_many :recommendations, dependent: :destroy
+
+  validates :prediction, :prediction_date, presence: true
+  validates :prediction, inclusion: {in: [0, 1]}
 end
