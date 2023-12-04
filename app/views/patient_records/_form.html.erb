@@ -1,0 +1,67 @@
+<%= form_with(model: patient_record, local: true) do |form| %>
+  <% if patient_record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient_record.errors.count, "error") %> prohibited this patient record from being saved:</h2>
+      <ul>
+        <% patient_record.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :patient_id %>
+    <%= form.collection_select :patient_id, Patient.all, :id, :full_name %>
+  </div>
+  <div class="field">
+    <%= form.label :chest_pain_type %>
+    <%= form.select :chest_pain_type, PatientRecord.chest_pain_type.options, {}%>
+  </div>
+  <div class="field">
+    <%= form.label :resting_blood_pressure %>
+    <%= form.number_field :resting_blood_pressure %> mm Hg
+  </div>
+  <div class="field">
+    <%= form.label :serum_cholesterol %>
+    <%= form.number_field :serum_cholesterol %> mg/dl
+  </div>
+  <div class="field">
+    <%= form.label :fasting_blood_sugar %>
+    <%= form.number_field :fasting_blood_sugar %> mg/dl
+  </div>
+  <div class="field">
+    <%= form.label :resting_ecg_results %>
+    <%= form.select :resting_ecg_results, PatientRecord.resting_ecg_results.options, {}%>
+  </div>
+  <div class="field">
+    <%= form.label :max_heart_rate_achieved %>
+    <%= form.number_field :max_heart_rate_achieved %> bpm
+  </div>
+  <div class="field">
+    <%= form.label :exercise_induced_angina %>
+    <%= form.number_field :exercise_induced_angina %>
+  </div>
+  <div class="field">
+    <%= form.label :st_depression %>
+    <%= form.number_field :st_depression %>
+  </div>
+  <div class="field">
+    <%= form.label :st_slope %>
+    <%= form.select :st_slope, PatientRecord.st_slope.options, {}%>
+  </div>
+  <div class="field">
+    <%= form.label :num_major_vessels %>
+    <%= form.number_field :num_major_vessels %>
+  </div>
+  <div class="field">
+    <%= form.label :thalassemia %>
+    <%= form.select :thalassemia, PatientRecord.thalassemia.options, {}%>
+  </div>
+  <div>
+    <%= form.label :recorded_at %>
+    <%= form.date_field :recorded_at %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

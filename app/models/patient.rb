@@ -30,4 +30,8 @@ class Patient < ApplicationRecord
     now = Time.zone.now.to_date
     now.year - date_of_birth.year - (date_of_birth.to_date.change(year: now.year) > now ? 1 : 0)
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
