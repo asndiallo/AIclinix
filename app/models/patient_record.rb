@@ -33,4 +33,24 @@ class PatientRecord < ApplicationRecord
                                   predicates: true, scope: true
   enumerize :st_slope, in: {upsloping: 1, flat: 2, downsloping: 3}, predicates: true, scope: true
   enumerize :thalassemia, in: {normal: 3, fixed_defect: 6, reversible_defect: 7}, predicates: true, scope: true
+
+  # Enumerized Fields Validation
+  validates :chest_pain_type, inclusion: {in: chest_pain_type.values}
+  validates :resting_ecg_results, inclusion: {in: resting_ecg_results.values}
+  validates :st_slope, inclusion: {in: st_slope.values}
+  validates :thalassemia, inclusion: {in: thalassemia.values}
+
+  # Numericality Validations
+  validates :resting_blood_pressure, :serum_cholesterol, :max_heart_rate_achieved, :st_depression,
+            numericality: {greater_than: 0}, allow_nil: true
+  validates :fasting_blood_sugar, :number_colored_major_vessels, numericality: {only_integer: true}, allow_nil: true
+
+  # recorded_at Validation
+  validate :recorded_at_cannot_be_in_the_future
+
+  private
+
+  def recorded_at_cannot_be_in_the_future
+    errors.add(:recorded_at, "can't be in the future") if recorded_at.present? && recorded_at > Time.zone.now
+  end
 end
