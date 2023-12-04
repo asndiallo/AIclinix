@@ -16,6 +16,24 @@
   border-radius: 4px;
 }
 
+#error_explanation {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+#error_explanation h2 {
+  margin-top: 0;
+}
+
+#error_explanation ul {
+  list-style: none;
+  padding: 0;
+}
+
 .actions input[type='submit'] {
   background-color: #0056b3;
   color: white;
