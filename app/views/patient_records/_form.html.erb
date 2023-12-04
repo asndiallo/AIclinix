@@ -15,7 +15,7 @@
   </div>
   <div class="field">
     <%= form.label :chest_pain_type %>
-    <%= form.number_field :chest_pain_type %>
+    <%= form.select :chest_pain_type, PatientRecord.chest_pain_type.options, {}%>
   </div>
   <div class="field">
     <%= form.label :resting_blood_pressure %>
@@ -31,7 +31,7 @@
   </div>
   <div class="field">
     <%= form.label :resting_ecg_results %>
-    <%= form.number_field :resting_ecg_results %>
+    <%= form.select :resting_ecg_results, PatientRecord.resting_ecg_results.options, {}%>
   </div>
   <div class="field">
     <%= form.label :max_heart_rate_achieved %>
@@ -47,7 +47,7 @@
   </div>
   <div class="field">
     <%= form.label :st_slope %>
-    <%= form.number_field :st_slope %>
+    <%= form.select :st_slope, PatientRecord.st_slope.options, {}%>
   </div>
   <div class="field">
     <%= form.label :num_major_vessels %>
@@ -55,7 +55,7 @@
   </div>
   <div class="field">
     <%= form.label :thalassemia %>
-    <%= form.number_field :thalassemia %>
+    <%= form.select :thalassemia, PatientRecord.thalassemia.options, {}%>
   </div>
   <div>
     <%= form.label :recorded_at %>
