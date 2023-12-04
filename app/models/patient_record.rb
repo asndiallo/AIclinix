@@ -45,7 +45,9 @@ class PatientRecord < ApplicationRecord
             numericality: {greater_than: 0}, allow_nil: true
   validates :fasting_blood_sugar, :number_colored_major_vessels, numericality: {only_integer: true}, allow_nil: true
 
-  # recorded_at Validation
+  # Others Validations
+  validates :number_colored_major_vessels, inclusion: {in: 0..3}, allow_nil: true
+  validates :exercise_induced_angina, inclusion: {in: [true, false]}, allow_nil: true
   validate :recorded_at_cannot_be_in_the_future
 
   private
