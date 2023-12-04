@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   # PatientRecords resource
   resources :patient_records
+
+  # patient routes
+  resources :patients
 end

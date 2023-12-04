@@ -8,7 +8,7 @@
 #  first_name    :string
 #  last_name     :string
 #  date_of_birth :date
-#  sex           :string           not null
+#  sex           :integer          not null
 #  user_id       :uuid             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

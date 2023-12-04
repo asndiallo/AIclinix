@@ -8,12 +8,11 @@
 #  first_name    :string
 #  last_name     :string
 #  date_of_birth :date
-#  sex           :string           not null
+#  sex           :integer          not null
 #  user_id       :uuid             not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
-# Purpose: Patient model
 class Patient < ApplicationRecord
   extend Enumerize
   belongs_to :user
@@ -21,8 +20,10 @@ class Patient < ApplicationRecord
   has_many :patient_records, dependent: :destroy
   has_many :heart_disease_predictions, dependent: :destroy
 
+  validates :sex, presence: true
+
   # Enumerations
-  enumerize :sex, in: [:male, :female], predicates: true, scope: true
+  enumerize :sex, in: {male: 1, female: 0}, predicates: true, scope: true
 
   def age
     return unless date_of_birth
