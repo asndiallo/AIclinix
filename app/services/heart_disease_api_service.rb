@@ -13,9 +13,7 @@ class HeartDiseaseApiService
     response.parsed_response if response.success?
   end
 
-  private
-
-  def transform_patient_data(patient_record) # rubocop:disable Metrics/MethodLength
+  def self.transform_patient_data(patient_record) # rubocop:disable Metrics/MethodLength
     patient = patient_record.patient
 
     {
@@ -24,7 +22,7 @@ class HeartDiseaseApiService
       cp:       patient_record.chest_pain_type_value, # Use the enumerize value method
       trestbps: patient_record.resting_blood_pressure,
       chol:     patient_record.serum_cholesterol,
-      fbs:      patient_record.fasting_blood_sugar,
+      fbs:      patient_record.fasting_blood_sugar > 120 ? 1 : 0,
       restecg:  patient_record.resting_ecg_results_value,
       thalach:  patient_record.max_heart_rate_achieved,
       exang:    patient_record.exercise_induced_angina ? 1 : 0,
