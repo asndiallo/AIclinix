@@ -46,10 +46,8 @@ class PatientRecordsController < ApplicationController
 
   def patient_record_params
     params.require(:patient_record).permit(:patient_id, :chest_pain_type, :resting_blood_pressure,
-                                           :serum_cholesterol_level, :fasting_blood_sugar,
-                                           :resting_electrocardiographic_results, :heart_rate_during_exercise,
-                                           :exercise_induced_angina,
-                                           :relative_to_rest_st_depression_induced_by_exercise, :slope,
-                                           :number_colored_major_vessels, :thalassemia, :recorded_at)
+                                           :serum_cholesterol, :fasting_blood_sugar, :resting_ecg_results,
+                                           :max_heart_rate_achieved, :exercise_induced_angina, :st_depression,
+                                           :st_slope, :number_colored_major_vessels, :thalassemia, :recorded_at)
   end
 end

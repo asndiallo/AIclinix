@@ -36,11 +36,11 @@ en:
         atypical_angina: "Atypical Angina"
         non_anginal_pain: "Non-Anginal Pain"
         asymptomatic: "Asymptomatic"
-      resting_electrocardiographic_results:
+      resting_ecg_results:
         normal: "Normal"
-        st_t_wave_abnormality: "Having ST-T wave abnormality"
+        stt_wave_abnormality: "Having ST-T wave abnormality"
         left_ventricular_hypertrophy: "Showing probable or definite left ventricular hypertrophy"
-      slope:
+      st_slope:
         upsloping: "Upsloping"
         flat: "Flat"
         downsloping: "Downsloping"

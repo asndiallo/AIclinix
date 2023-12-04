@@ -6,9 +6,10 @@
     <% @patient_records.each do |record| %>
       <tr>
         <!-- Record details -->
+        <td><%= record.patient.full_name %></td>
         <td><%= link_to 'Show', record %></td>
         <td><%= link_to 'Edit', edit_patient_record_path(record) %></td>
-        <td><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', patient_record_path(record), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
