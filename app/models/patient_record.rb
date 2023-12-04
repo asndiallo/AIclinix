@@ -26,6 +26,13 @@ class PatientRecord < ApplicationRecord
 
   belongs_to :patient
 
+  HEART_DISEASE_PREDICTION_COLUMNS = [
+    'chest_pain_type', 'resting_blood_pressure', 'serum_cholesterol',
+    'fasting_blood_sugar', 'resting_ecg_results', 'max_heart_rate_achieved',
+    'exercise_induced_angina', 'st_depression', 'st_slope',
+    'number_colored_major_vessels', 'thalassemia'
+  ].freeze
+
   # Enumerations
   enumerize :chest_pain_type, in: {typical_angina: 1, atypical_angina: 2, non_anginal_pain: 3, asymptomatic: 4},
                               predicates: true, scope: true
@@ -50,7 +57,19 @@ class PatientRecord < ApplicationRecord
   validates :exercise_induced_angina, inclusion: {in: [true, false]}, allow_nil: true
   validate :recorded_at_cannot_be_in_the_future
 
+  after_save :trigger_heart_disease_prediction, if: :heart_disease_columns_changed?
+
+  scope :of_patient, ->(patient) { where(patient:) }
+
   private
+
+  def heart_disease_columns_changed?
+    HEART_DISEASE_PREDICTION_COLUMNS.any? { |column| saved_change_to_attribute?(column) }
+  end
+
+  def trigger_heart_disease_prediction
+    HeartDiseasePredictionJob.perform_later(self)
+  end
 
   def recorded_at_cannot_be_in_the_future
     errors.add(:recorded_at, "can't be in the future") if recorded_at.present? && recorded_at > Time.zone.now

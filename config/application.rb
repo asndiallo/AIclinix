@@ -34,5 +34,8 @@ module AIclinix
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    # Set Sidekiq as Active Job Queue Adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end
