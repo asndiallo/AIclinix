@@ -10,7 +10,42 @@ class HeartDiseaseApiService
   def self.predict(patient_record)
     data = PatientDataTransformer.new(patient_record).transform
     response = post('/predict/', body: {data:}.to_json, headers: {'Content-Type' => 'application/json'})
-    response.parsed_response if response.success?
+
+    return unless response.success?
+
+    parsed_response = response.parsed_response
+    store_prediction(patient_record, parsed_response)
+  end
+
+  def self.store_prediction(patient_record, parsed_response)
+    ActiveRecord::Base.transaction do
+      prediction = HeartDiseasePrediction.create!(
+        patient:         patient_record.patient,
+        prediction:      parsed_response['prediction'],
+        prediction_date: Time.current
+      )
+
+      store_shap_values(prediction, parsed_response['explanation'])
+      store_recommendations(prediction, parsed_response['recommendations'])
+    end
+  end
+
+  def self.store_shap_values(prediction, shap_values)
+    shap_values.each do |shap_value|
+      prediction.shap_values.create!(
+        feature_name: shap_value['feature_name'],
+        shap_value:   shap_value['shap_value']
+      )
+    end
+  end
+
+  def self.store_recommendations(prediction, recommendations)
+    recommendations.each do |_key, text|
+      prediction.recommendations.create!(
+        recommendation_text: text,
+        language:            I18n.locale.to_s
+      )
+    end
   end
 end
 
