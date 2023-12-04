@@ -20,10 +20,13 @@ class Patient < ApplicationRecord
   has_many :patient_records, dependent: :destroy
   has_many :heart_disease_predictions, dependent: :destroy
 
-  validates :sex, presence: true
-
   # Enumerations
   enumerize :sex, in: {male: 1, female: 0}, predicates: true, scope: true
+
+  validates :sex, presence: true, inclusion: {in: sex.values}
+  validates :first_name, :last_name, presence: true, length: {maximum: 100, minimum: 2}
+  validates :date_of_birth, presence: true
+  validate :date_of_birth_should_be_in_the_past
 
   def age
     return unless date_of_birth
@@ -34,5 +37,11 @@ class Patient < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def date_of_birth_should_be_in_the_past
+    errors.add(:date_of_birth, 'should be in the past') if date_of_birth.present? && date_of_birth > Time.zone.today
   end
 end
