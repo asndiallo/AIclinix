@@ -32,7 +32,7 @@ class PatientRecord < ApplicationRecord
   enumerize :resting_ecg_results, in: {normal: 0, stt_wave_abnormality: 1, left_ventricular_hypertrophy: 2},
                                   predicates: true, scope: true
   enumerize :st_slope, in: {upsloping: 1, flat: 2, downsloping: 3}, predicates: true, scope: true
-  enumerize :thalassemia, in: {normal: 3, fixed_defect: 6, reversible_defect: 7}, predicates: true, scope: true
+  enumerize :thalassemia, in: {normal: 1, fixed_defect: 2, reversible_defect: 3}, predicates: true, scope: true
 
   # Enumerized Fields Validation
   validates :chest_pain_type, inclusion: {in: chest_pain_type.values}

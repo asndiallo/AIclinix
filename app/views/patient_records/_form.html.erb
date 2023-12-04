@@ -19,11 +19,11 @@
   </div>
   <div class="field">
     <%= form.label :resting_blood_pressure %>
-    <%= form.number_field :resting_blood_pressure %> mm Hg
+    <%= form.number_field :resting_blood_pressure, :step => "0.01" %> mm Hg
   </div>
   <div class="field">
     <%= form.label :serum_cholesterol %>
-    <%= form.number_field :serum_cholesterol %> mg/dl
+    <%= form.number_field :serum_cholesterol, :step => "0.01" %> mg/dl
   </div>
   <div class="field">
     <%= form.label :fasting_blood_sugar %>
@@ -43,7 +43,7 @@
   </div>
   <div class="field">
     <%= form.label :st_depression %>
-    <%= form.number_field :st_depression %>
+    <%= form.number_field :st_depression, :step => "0.01" %>
   </div>
   <div class="field">
     <%= form.label :st_slope %>
