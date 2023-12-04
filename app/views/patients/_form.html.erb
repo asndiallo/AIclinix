@@ -23,7 +23,7 @@
   </div>
   <div class="field">
     <%= form.label :sex %>
-    <%= form.select :sex, ['male', 'female'] %>
+    <%= form.select :sex, Patient.sex.options, {} %>
   </div>
   <div class="actions">
     <%= form.submit %>

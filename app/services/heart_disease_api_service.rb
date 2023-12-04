@@ -20,7 +20,7 @@ class HeartDiseaseApiService
 
     {
       age:      patient.age,
-      sex:      patient.sex == 'male' ? 1 : 0,
+      sex:      patient.sex_value,
       cp:       patient_record.chest_pain_type_value, # Use the enumerize value method
       trestbps: patient_record.resting_blood_pressure,
       chol:     patient_record.serum_cholesterol,
