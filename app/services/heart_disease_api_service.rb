@@ -1,33 +1,48 @@
 # frozen_string_literal: true
 
 require 'httparty'
+require 'logger'
 
 # Service object to call Heart Disease API
 class HeartDiseaseApiService
   include HTTParty
   base_uri ENV.fetch('HEART_DISEASE_API_URL', nil)
+  @logger = ::Logger.new($stdout)
 
   def self.predict(patient_record)
     data = PatientDataTransformer.new(patient_record).transform
-    response = post('/predict/', body: {data:}.to_json, headers: {'Content-Type' => 'application/json'})
+    begin
+      response = post('/predict/', body: {data:}.to_json, headers: {'Content-Type' => 'application/json'})
 
-    return unless response.success?
-
-    parsed_response = response.parsed_response
-    store_prediction(patient_record, parsed_response)
+      if response.success?
+        parsed_response = response.parsed_response
+        store_prediction(patient_record, parsed_response)
+      else
+        handle_error(response)
+      end
+    rescue HTTParty::Error => e
+      @logger.error("HTTParty Error: #{e.message}")
+    rescue StandardError => e
+      @logger.error("Standard Error: #{e.message}")
+    end
   end
 
   def self.store_prediction(patient_record, parsed_response)
     ActiveRecord::Base.transaction do
-      prediction = HeartDiseasePrediction.create!(
-        patient:         patient_record.patient,
-        prediction:      parsed_response['prediction'],
-        prediction_date: Time.current
-      )
-
+      prediction = create_prediction_record(patient_record, parsed_response)
       store_shap_values(prediction, parsed_response['explanation'])
       store_recommendations(prediction, parsed_response['recommendations'])
     end
+  rescue ActiveRecord::ActiveRecordError => e
+    @logger.error("ActiveRecord Error: #{e.message}")
+  end
+
+  def self.create_prediction_record(patient_record, parsed_response)
+    HeartDiseasePrediction.create!(
+      patient:         patient_record.patient,
+      prediction:      parsed_response['prediction'],
+      prediction_date: Time.zone.now
+    )
   end
 
   def self.store_shap_values(prediction, shap_values)
@@ -46,6 +61,10 @@ class HeartDiseaseApiService
         language:            I18n.locale.to_s
       )
     end
+  end
+
+  def self.handle_error(response)
+    @@logger.error("API Error: #{response.code} - #{response.message}")
   end
 end
 
