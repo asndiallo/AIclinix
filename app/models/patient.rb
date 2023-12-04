@@ -24,8 +24,7 @@ class Patient < ApplicationRecord
   enumerize :sex, in: {male: 1, female: 0}, predicates: true, scope: true
 
   validates :sex, presence: true, inclusion: {in: sex.values}
-  validates :first_name, presence: true, length: {maximum: 100, minimum: 2}
-  validates :last_name, presence: true, length: {maximum: 100, minimum: 2}
+  validates :first_name, :last_name, presence: true, length: {maximum: 100, minimum: 2}
   validates :date_of_birth, presence: true
   validate :date_of_birth_should_be_in_the_past
 
