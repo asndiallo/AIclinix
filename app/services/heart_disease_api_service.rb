@@ -55,10 +55,10 @@ class HeartDiseaseApiService
   end
 
   def self.store_recommendations(prediction, recommendations)
-    recommendations.each do |_key, text|
+    recommendations.each do |key, _text|
       prediction.recommendations.create!(
-        recommendation_text: text,
-        language:            I18n.locale.to_s
+        recommendation_key: key.to_s,
+        language:           I18n.locale.to_s
       )
     end
   end

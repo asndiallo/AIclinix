@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= form.label :fasting_blood_sugar %>
-    <%= form.number_field :fasting_blood_sugar %> mg/dl
+    <%= form.number_field :fasting_blood_sugar, :step => "0.01"  %> mg/dl
   </div>
   <div class="field">
     <%= form.label :resting_ecg_results %>

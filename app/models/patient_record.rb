@@ -9,7 +9,7 @@
 #  chest_pain_type              :integer          not null
 #  resting_blood_pressure       :float
 #  serum_cholesterol            :float
-#  fasting_blood_sugar          :integer
+#  fasting_blood_sugar          :float
 #  resting_ecg_results          :integer          not null
 #  max_heart_rate_achieved      :integer
 #  exercise_induced_angina      :boolean          default(FALSE)
@@ -41,9 +41,9 @@ class PatientRecord < ApplicationRecord
   validates :thalassemia, inclusion: {in: thalassemia.values}
 
   # Numericality Validations
-  validates :resting_blood_pressure, :serum_cholesterol, :max_heart_rate_achieved, :st_depression,
+  validates :resting_blood_pressure, :serum_cholesterol, :max_heart_rate_achieved, :st_depression, :fasting_blood_sugar,
             numericality: {greater_than: 0}, allow_nil: true
-  validates :fasting_blood_sugar, :number_colored_major_vessels, numericality: {only_integer: true}, allow_nil: true
+  validates :number_colored_major_vessels, numericality: {only_integer: true}, allow_nil: true
 
   # Others Validations
   validates :number_colored_major_vessels, inclusion: {in: 0..3}, allow_nil: true
