@@ -8,7 +8,9 @@ class PatientsController < ApplicationController
     @patients = current_user.patients # Load only the current user's patients
   end
 
-  def show; end
+  def show
+    @heart_disease_prediction = (@patient.latest_heart_disease_prediction if @patient.heart_disease_predictions.any?)
+  end
 
   def new
     @patient = current_user.patients.build # Initialize a new patient for the current_user

@@ -34,20 +34,19 @@ h1
       | &nbsp;
     = @patient.user.email
 
-  - if @patient.heart_disease_predictions.any?
-    - prediction = @patient.latest_heart_disease_prediction
+  - if @heart_disease_prediction
     h2
       | Heart Disease Prediction
       span
         | &nbsp; (last updated: &nbsp;
-        = time_ago_in_words(prediction.created_at)
+        = time_ago_in_words(@heart_disease_prediction.created_at)
         | &nbsp; ago)
     p
       strong
         | Prediction:
         | &nbsp;
-      = prediction.prediction == 1 ? 'Likely' : 'Unlikely'
-    div data-controller="apex-chart" data-apex-chart-shap-data-value=prediction.shap_values.to_json
+      = @heart_disease_prediction.prediction == 1 ? 'Likely' : 'Unlikely'
+    div data-controller="apex-chart" data-apex-chart-shap-data-value=@heart_disease_prediction.shap_values.to_json
 
   = link_to 'Edit Patient', edit_patient_path(@patient)
   |  | 
