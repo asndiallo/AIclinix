@@ -75,6 +75,8 @@ group :development do
   # Use annotate to annotate models, routes, fixtures, and others
   gem 'annotate'
 
+  gem 'slim-rails', '~> 3.6'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

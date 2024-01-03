@@ -1,0 +1,55 @@
+= form_with(model: patient_record, local: true) do |form|
+  - if patient_record.errors.any?
+    #error_explanation
+      h2
+        = pluralize(patient_record.errors.count, "error")
+        |  prohibited this patient record from being saved:
+    ul
+      - patient_record.errors.full_messages.each do |message|
+        li
+          = message
+  .field
+    = form.label :patient_id
+    = form.collection_select :patient_id, Patient.all, :id, :full_name
+  .field
+    = form.label :chest_pain_type
+    = form.select :chest_pain_type, PatientRecord.chest_pain_type.options, {}
+  .field
+    = form.label :resting_blood_pressure
+    = form.number_field :resting_blood_pressure, :step => "0.01"
+    |  mm Hg 
+  .field
+    = form.label :serum_cholesterol
+    = form.number_field :serum_cholesterol, :step => "0.01"
+    |  mg/dl 
+  .field
+    = form.label :fasting_blood_sugar
+    = form.number_field :fasting_blood_sugar, :step => "0.01"
+    |  mg/dl 
+  .field
+    = form.label :resting_ecg_results
+    = form.select :resting_ecg_results, PatientRecord.resting_ecg_results.options, {}
+  .field
+    = form.label :max_heart_rate_achieved
+    = form.number_field :max_heart_rate_achieved
+    |  bpm 
+  .field
+    = form.label :exercise_induced_angina
+    = form.check_box :exercise_induced_angina
+  .field
+    = form.label :st_depression
+    = form.number_field :st_depression, :step => "0.01"
+  .field
+    = form.label :st_slope
+    = form.select :st_slope, PatientRecord.st_slope.options, {}
+  .field
+    = form.label :number_colored_major_vessels
+    = form.number_field :number_colored_major_vessels
+  .field
+    = form.label :thalassemia
+    = form.select :thalassemia, PatientRecord.thalassemia.options, {}
+  div
+    = form.label :recorded_at
+    = form.date_field :recorded_at
+  .actions
+    = form.submit

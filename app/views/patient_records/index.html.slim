@@ -1,0 +1,15 @@
+h1
+  | Patient Records
+= link_to 'New Patient Record', new_patient_record_path
+table
+  tbody
+    - @patient_records.each do |record|
+      tr
+        td
+          = record.patient.full_name
+        td
+          = link_to 'Show', record
+        td
+          = link_to 'Edit', edit_patient_record_path(record)
+        td
+          = button_to 'Destroy', patient_record_path(record), method: :delete, data: { confirm: 'Are you sure?' }

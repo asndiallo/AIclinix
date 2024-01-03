@@ -1,0 +1,30 @@
+h1
+  | Patient Details
+.patient-details
+  p
+    strong
+      | First Name:
+    = @patient.first_name
+  p
+    strong
+      | Last Name:
+    = @patient.last_name
+  p
+    strong
+      | Age:
+    = @patient.age
+  p
+    strong
+      | Date of Birth:
+    = @patient.date_of_birth
+  p
+    strong
+      | Gender:
+    = @patient.sex
+  p
+    strong
+      | Managed by:
+    = @patient.user.email
+  = link_to 'Edit Patient', edit_patient_path(@patient)
+  |  | 
+  = link_to 'Back to Patients', patients_path

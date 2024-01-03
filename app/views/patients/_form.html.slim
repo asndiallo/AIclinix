@@ -1,0 +1,24 @@
+= form_with(model: patient, local: true) do |form|
+  - if patient.errors.any?
+    #error_explanation
+      h2
+        = pluralize(patient.errors.count, "error")
+        |  prohibited this patient from being saved:
+    ul
+      - patient.errors.full_messages.each do |message|
+        li
+          = message
+  .field
+    = form.label :first_name
+    = form.text_field :first_name
+  .field
+    = form.label :last_name
+    = form.text_field :last_name
+  .field
+    = form.label :date_of_birth
+    = form.date_field :date_of_birth
+  .field
+    = form.label :sex
+    = form.select :sex, Patient.sex.options, {}
+  .actions
+    = form.submit
