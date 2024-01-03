@@ -2,6 +2,6 @@ p
   strong
     | Patient:
   = @patient_record.patient.full_name
-= link_to 'Edit', edit_patient_record_path(@patient_record)
-|  | 
-= link_to 'Back', patient_records_path
+  = link_to 'Edit', edit_patient_record_path(@patient_record)
+  |  | 
+  = link_to 'Back', patient_records_path
