@@ -18,5 +18,5 @@ class Recommendation < ApplicationRecord
                                                   'high_cholesterol',
                                                   'high_fbs',
                                                   'high_risk',
-                                                  'low_risk}']}
+                                                  'low_risk']}
 end
