@@ -34,6 +34,11 @@ h1
       | &nbsp;
     = @patient.user.email
 
+  - if @patient.heart_disease_predictions.any?
+    h2
+      | Heart Disease Prediction
+    div data-controller="apex-chart" data-apex-chart-shap-data-value=@patient.heart_disease_predictions.last.shap_values.to_json
+
   = link_to 'Edit Patient', edit_patient_path(@patient)
   |  | 
   = link_to 'Back to Patients', patients_path
