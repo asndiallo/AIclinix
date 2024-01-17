@@ -1,0 +1,35 @@
+dl
+dt Patient Name:
+dd = @patient_record.patient.full_name
+dt Age:
+dd = @patient_record.patient.age
+dt Sex:
+dd = @patient_record.patient.sex.capitalize
+dt Chest Pain Type:
+dd = @patient_record.chest_pain_type.humanize
+dt Resting Blood Pressure:
+dd = @patient_record.resting_blood_pressure
+dt Serum Cholesterol:
+dd = @patient_record.serum_cholesterol
+dt Fasting Blood Sugar:
+dd = @patient_record.fasting_blood_sugar
+dt Resting ECG Results:
+dd = @patient_record.resting_ecg_results.humanize
+dt Max Heart Rate Achieved:
+dd = @patient_record.max_heart_rate_achieved
+dt Exercise Induced Angina:
+dd = @patient_record.exercise_induced_angina ? 'Yes' : 'No'
+dt ST Depression:
+dd = @patient_record.st_depression
+dt ST Slope:
+dd = @patient_record.st_slope.humanize
+dt Number of Major Vessels Colored by Fluoroscopy:
+dd = @patient_record.number_colored_major_vessels
+dt Thalassemia:
+dd = @patient_record.thalassemia.humanize
+| &nbsp;
+= link_to 'Show Patient', @patient_record.patient
+|  | 
+= link_to 'Edit', edit_patient_record_path(@patient_record)
+|  | 
+= link_to 'Back', patient_records_path

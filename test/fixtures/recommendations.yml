@@ -4,8 +4,7 @@
 #
 #  id                          :uuid             not null, primary key
 #  heart_disease_prediction_id :uuid             not null
-#  recommendation_text         :text
-#  language                    :string
+#  recommendation_key          :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #

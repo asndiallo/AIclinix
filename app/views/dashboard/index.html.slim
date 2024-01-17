@@ -1,0 +1,20 @@
+.dashboard-container
+  section.quick-actions
+    = button_to 'Add Patient', new_patient_path, method: :get
+    button
+      | View Reports
+    = button_to 'Logout', destroy_user_session_path, method: :delete
+  section.patient-summary
+    h2
+      | Recent Patients
+    ul
+      - # TODO: Placeholder for patient list. Replace with actual data
+    li
+      | John Doe - Last visit on 10/01/2023
+    li
+      | Jane Smith - Last visit on 09/28/2023
+  section.statistics
+    h2
+      | Statistics
+    p
+      | Total Patients: 50

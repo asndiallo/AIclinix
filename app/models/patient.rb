@@ -39,6 +39,11 @@ class Patient < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  # Instance method to get the latest heart disease prediction
+  def latest_heart_disease_prediction
+    heart_disease_predictions.order(created_at: :desc).first
+  end
+
   private
 
   def date_of_birth_should_be_in_the_past

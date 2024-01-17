@@ -13,4 +13,7 @@
 #
 class ShapValue < ApplicationRecord
   belongs_to :heart_disease_prediction
+
+  validates :feature_name, :shap_value, presence: true
+  # TODO: Add validation for feature_name inclusion and shape_value numericality
 end

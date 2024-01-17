@@ -9,7 +9,7 @@
 #  chest_pain_type              :integer          not null
 #  resting_blood_pressure       :float
 #  serum_cholesterol            :float
-#  fasting_blood_sugar          :integer
+#  fasting_blood_sugar          :float
 #  resting_ecg_results          :integer          not null
 #  max_heart_rate_achieved      :integer
 #  exercise_induced_angina      :boolean          default(FALSE)

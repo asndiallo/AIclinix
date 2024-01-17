@@ -52,6 +52,9 @@ gem 'httparty'
 # Use Enumerize for enums
 gem 'enumerize'
 
+# Add sidekiq for background jobs
+gem 'sidekiq'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -71,6 +74,8 @@ group :development do
 
   # Use annotate to annotate models, routes, fixtures, and others
   gem 'annotate'
+
+  gem 'slim-rails', '~> 3.6'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

@@ -6,4 +6,5 @@ pin 'application', preload: true
 pin '@hotwired/turbo-rails', to: 'turbo.min.js', preload: true
 pin '@hotwired/stimulus', to: 'stimulus.min.js', preload: true
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
+pin 'apexcharts', to: 'https://ga.jspm.io/npm:apexcharts@3.41.0/dist/apexcharts.common.js', preload: true
 pin_all_from 'app/javascript/controllers', under: 'controllers'

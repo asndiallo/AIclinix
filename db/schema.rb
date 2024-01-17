@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_153552) do
   create_table "heart_disease_predictions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "patient_id", null: false
     t.integer "prediction"
-    t.datetime "prediction_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_heart_disease_predictions_on_patient_id"
@@ -29,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_153552) do
     t.integer "chest_pain_type", null: false
     t.float "resting_blood_pressure"
     t.float "serum_cholesterol"
-    t.integer "fasting_blood_sugar"
+    t.float "fasting_blood_sugar"
     t.integer "resting_ecg_results", null: false
     t.integer "max_heart_rate_achieved"
     t.boolean "exercise_induced_angina", default: false
@@ -56,8 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_153552) do
 
   create_table "recommendations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "heart_disease_prediction_id", null: false
-    t.text "recommendation_text"
-    t.string "language"
+    t.string "recommendation_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["heart_disease_prediction_id"], name: "index_recommendations_on_heart_disease_prediction_id"
