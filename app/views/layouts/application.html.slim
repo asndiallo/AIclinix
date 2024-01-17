@@ -14,5 +14,6 @@ html
       = notice
     p.alert
       = alert
-    = yield
-    = javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', crossorigin: 'anonymous'
+    .container
+      = yield
+      = javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', crossorigin: 'anonymous'
