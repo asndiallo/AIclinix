@@ -73,6 +73,8 @@
                     i.fa.fa-chart-line.me-2
                     | ST Depression: #{record.st_depression} mm
             - else
-              .alert.alert-warning Missing records
+              .alert.alert-warning Missing records.
           .card-footer.bg-white
-            = link_to 'View Patient', patient_path(patient), class: 'btn btn-outline-primary btn-sm'
+            = link_to 'View Patient', patient_path(patient), class: 'btn btn-outline-primary btn-sm me-2'
+            - if patient.patient_records.blank?
+              = link_to 'Add Record', new_patient_record_path(patient), class: 'btn btn-primary btn-sm'
