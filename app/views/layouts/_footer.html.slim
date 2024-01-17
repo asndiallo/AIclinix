@@ -1,16 +1,32 @@
 footer.bg-dark.text-white.mt-5.py-3
   .container
     .row
-      .col-md-6
-        p.mb-0 &copy; #{Time.current.year} AIclinix
-      .col-md-6.text-md-end
-        ul.list-inline.mb-0
+      .col-md-4
+        h5 About AIclinix
+        p.small AIclinix is a leading AI-driven diagnostic tool, revolutionizing healthcare through technology and innovation.
+
+      .col-md-4
+        h5 Contact
+        ul.list-unstyled.small
+          li
+            | 📍 Address: 123 Healthcare Blvd, Medical City
+          li
+            | 📞 Phone: +123 456 7890
+          li
+            | ✉️ Email: contact@aiclinix.com
+
+      .col-md-4
+        h5 Follow Us
+        ul.list-inline
           li.list-inline-item
-            = link_to 'https://github.com/yourusername', target: '_blank' do
+            = link_to 'https://github.com/username', target: '_blank' do
               i.fa.fa-github
           li.list-inline-item
-            = link_to 'https://twitter.com/yourusername', target: '_blank' do
+            = link_to 'https://twitter.com/username', target: '_blank' do
               i.fa.fa-twitter
           li.list-inline-item
-            = link_to 'https://facebook.com/yourusername', target: '_blank' do
+            = link_to 'https://facebook.com/username', target: '_blank' do
               i.fa.fa-facebook
+
+    .text-center.small.mt-3
+      | &copy; #{Time.current.year} AIclinix. All rights reserved.
