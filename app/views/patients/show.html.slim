@@ -50,5 +50,8 @@
 
         .d-flex.justify-content-between.mt-4
           = link_to 'Edit Patient', edit_patient_path(@patient), class: 'btn btn-primary'
-          = link_to 'Patient Records', patient_record_path(@patient), class: 'btn btn-secondary' if @patient.patient_records.any?
+          - if @patient.patient_records.any?
+            = link_to 'Patient Records', patient_record_path(patient_id: @patient.id), class: 'btn btn-secondary'
+          - else
+            = link_to 'New Patient Record', new_patient_record_path(patient_id: @patient.id), class: 'btn btn-secondary'
           = link_to 'Back to Patients', patients_path, class: 'btn btn-outline-secondary'

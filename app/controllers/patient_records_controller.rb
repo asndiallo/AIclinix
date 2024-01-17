@@ -41,7 +41,7 @@ class PatientRecordsController < ApplicationController
   private
 
   def set_patient_record
-    @patient_record = PatientRecord.find(params[:id])
+    @patient_record = PatientRecord.where(patient_id: params[:patient_id]).last
   end
 
   def patient_record_params
