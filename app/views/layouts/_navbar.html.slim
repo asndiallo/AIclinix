@@ -9,6 +9,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.sticky-top
           = link_to 'Dashboard', root_path, class: 'nav-link'
         li.nav-item
           = link_to 'Patients', patients_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'New Patient Record', new_patient_record_path, class: 'nav-link'
         - if user_signed_in?
           li.nav-item
             = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-light'
