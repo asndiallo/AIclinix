@@ -20,28 +20,39 @@
 /       | Total Patients: 50
 
 
-h1 Dashboard
+.container.mt-5
+  h1.mb-4 Welcome to your dashboard #{current_user.email}!
+  .alert.alert-info
+    h2 Patients with medical records
+    span.badge.bg-primary = "#{@patients_with_records.count} / #{@total_patients}"
 
-h2 Total Patients
-span= @total_patients
-
-h2 Patients Overview
-.row
-  - @patients.each do |patient|
-    .col-md-4
-      .card
-        .card-body
-          h3.card-title
-            = patient.full_name
-          .card-text
-            p= "Age: #{patient.age}"
-            p= "Sex: #{patient.sex.text.capitalize}"
-            p= "Birthdate: #{patient.date_of_birth}"
+  h2.mt-4.mb-3 Patients Overview
+  .row
+    - @patients.each do |patient|
+      .col-md-4.mb-4
+        .card
+          .card-header
+            h5.card-title = patient.full_name
+            .badge
+              - if patient.sex.text.capitalize == 'Male'
+                span.badge.bg-primary Male
+              - else
+                span.badge.bg-danger Female
+          .card-body
+            p.card-text = "Age: #{patient.age}"
+            p.card-text = "Birthdate: #{patient.date_of_birth}"
             - if patient.patient_records.present?
-              - patient.patient_records.each do |record|
-                p
-                  | Record
-                  / | Record: #{record.description} (Value: #{record.value})
+              ul.list-group.list-group-flush
+                - patient.patient_records.each do |record|
+                  li.list-group-item
+                    | Chest Pain Type: #{record.chest_pain_type.text} <br>
+                    | Resting BP: #{record.resting_blood_pressure} mmHg <br>
+                    | Cholesterol: #{record.serum_cholesterol} mg/dL <br>
+                    | Fasting Blood Sugar: #{record.fasting_blood_sugar} mg/dL <br>
+                    | Max Heart Rate: #{record.max_heart_rate_achieved} bpm <br>
+                    | Angina Induced by Exercise: #{record.exercise_induced_angina ? 'Yes' : 'No'} <br>
+                    | ST Depression: #{record.st_depression} mm <br>
             - else
-              p Missing records
-            = link_to 'View Patient', patient_path(patient), class: 'btn btn-primary'
+              .alert.alert-warning Missing records
+          .card-footer
+            = link_to 'View Patient', patient_path(patient), class: 'btn btn-outline-primary btn-sm'
