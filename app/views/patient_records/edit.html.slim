@@ -1,4 +1,6 @@
-h1
-  | Edit Patient Record
-  = render 'form', patient_record: @patient_record
-  = link_to 'Back', patient_records_path
+.container
+  .row.justify-content-center
+    .col-md-8
+      h1.mb-4.text-center
+        | Edit Patient Record
+      = render 'form', patient_record: @patient_record
