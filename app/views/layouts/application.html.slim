@@ -1,8 +1,7 @@
 doctype html
 html
   head
-    title
-      | AIclinix
+    title AIclinix
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
@@ -16,7 +15,7 @@ html
       = notice
     p.alert
       = alert
-    .container
+    .container.flex-grow-1
       = yield
     = render 'layouts/footer'
-      = javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', crossorigin: 'anonymous'
+    = javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js', crossorigin: 'anonymous'
