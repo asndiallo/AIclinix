@@ -30,16 +30,18 @@ h2 Patients Overview
   - @patients.each do |patient|
     .col-md-4
       .card
-        .card-header
-          h3= patient.full_name
-          p= "Age: #{patient.age}"
-          p= "Sex: #{patient.sex.text.capitalize}"
-          p= "Birthdate: #{patient.date_of_birth}"
         .card-body
-          - if patient.patient_records.present?
-            - patient.patient_records.each do |record|
-              p
-                | Record
-                / | Record: #{record.description} (Value: #{record.value})
-          - else
-            p Missing records
+          h3.card-title
+            = patient.full_name
+          .card-text
+            p= "Age: #{patient.age}"
+            p= "Sex: #{patient.sex.text.capitalize}"
+            p= "Birthdate: #{patient.date_of_birth}"
+            - if patient.patient_records.present?
+              - patient.patient_records.each do |record|
+                p
+                  | Record
+                  / | Record: #{record.description} (Value: #{record.value})
+            - else
+              p Missing records
+            = link_to 'View Patient', patient_path(patient), class: 'btn btn-primary'

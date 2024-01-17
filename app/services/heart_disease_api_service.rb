@@ -54,7 +54,7 @@ class HeartDiseaseApiService
   end
 
   def self.store_recommendations(prediction, recommendations)
-    recommendations.each do |key, _text|
+    recommendations.each_key do |key|
       prediction.recommendations.create!(
         recommendation_key: key.to_s
       )

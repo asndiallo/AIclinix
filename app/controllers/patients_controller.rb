@@ -43,7 +43,7 @@ class PatientsController < ApplicationController
   private
 
   def set_patient
-    @patient = current_user.patients.find(params[:id])  # Ensure user can only manage their own patients
+    @patient = current_user.patients.find(params[:id]) # Ensure user can only manage their own patients
   end
 
   def patient_params
