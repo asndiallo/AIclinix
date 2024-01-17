@@ -1,0 +1,16 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  .container
+    = link_to 'AIclinix', root_path, class: 'navbar-brand'
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        li.nav-item
+          = link_to 'Dashboard', root_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'Patients', patients_path, class: 'nav-link'
+        / li.nav-item
+        /   = link_to 'Contact', contact_path, class: 'nav-link'
+
+        li.nav-item
+          = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link'
