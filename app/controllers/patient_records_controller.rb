@@ -2,8 +2,7 @@
 
 # PatientRecordsController
 class PatientRecordsController < ApplicationController
-  before_action :set_patient_record, only: [:show]
-  before_action :set_record, only: [:edit, :update, :destroy]
+  before_action :set_patient_record, only: [:show, :edit, :update, :destroy]
 
   def index
     @patient_records = PatientRecord.all
@@ -42,11 +41,11 @@ class PatientRecordsController < ApplicationController
   private
 
   def set_patient_record
-    @patient_record = PatientRecord.where(patient_id: params[:patient_id]).last
-  end
-
-  def set_record
-    @patient_record = PatientRecord.find(params[:id])
+    @patient_record = if params[:patient_id].nil?
+                        PatientRecord.find(params[:id])
+                      else
+                        PatientRecord.where(patient_id: params[:patient_id]).last
+                      end
   end
 
   def patient_record_params
