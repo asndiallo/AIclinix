@@ -5,13 +5,13 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.sticky-top
       span.navbar-toggler-icon
     #navbarNav.collapse.navbar-collapse
       ul.navbar-nav.ms-auto
-        li.nav-item
-          = link_to 'Dashboard', root_path, class: 'nav-link'
-        li.nav-item
-          = link_to 'Patients', patients_path, class: 'nav-link'
-        li.nav-item
-          = link_to 'New Patient Record', new_patient_record_path, class: 'nav-link'
         - if user_signed_in?
+          li.nav-item
+            = link_to 'Dashboard', root_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'Patients', patients_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'New Patient Record', new_patient_record_path, class: 'nav-link'
           li.nav-item.dropdown
             a.nav-link.dropdown-toggle[href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
               | #{current_user.email}
