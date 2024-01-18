@@ -1,20 +1,80 @@
-.dashboard-container
-  section.quick-actions
-    = button_to 'Add Patient', new_patient_path, method: :get
-    button
-      | View Reports
-    = button_to 'Logout', destroy_user_session_path, method: :delete
-  section.patient-summary
-    h2
-      | Recent Patients
-    ul
-      - # TODO: Placeholder for patient list. Replace with actual data
-    li
-      | John Doe - Last visit on 10/01/2023
-    li
-      | Jane Smith - Last visit on 09/28/2023
-  section.statistics
-    h2
-      | Statistics
-    p
-      | Total Patients: 50
+/ .dashboard-container
+/   section.quick-actions
+/     = button_to 'Add Patient', new_patient_path, method: :get
+/     button
+/       | View Reports
+/     = button_to 'Logout', destroy_user_session_path, method: :delete
+/   section.patient-summary
+/     h2
+/       | Recent Patients
+/     ul
+/       - # TODO: Placeholder for patient list. Replace with actual data
+/     li
+/       | John Doe - Last visit on 10/01/2023
+/     li
+/       | Jane Smith - Last visit on 09/28/2023
+/   section.statistics
+/     h2
+/       | Statistics
+/     p
+/       | Total Patients: 50
+
+
+.container.mt-1
+  .row
+    .col-12
+      h1.mb-4 Welcome to your dashboard #{current_user.email}!
+      .alert.alert-info.p-3.mb-4
+        h2.h4 Patients with medical records
+        span.badge.bg-primary.ms-2 = "#{@patients_with_records.count} / #{@total_patients}"
+
+  h2.mt-4.mb-4 Patients Overview
+  .row.g-4
+    - @patients.each do |patient|
+      .col-md-4
+        .card.h-100
+          .card-header.bg-light
+            .d-flex.justify-content-between
+              h5.card-title.mb-0 = patient.full_name
+              span.badge
+                - if patient.sex.text.capitalize == 'Male'
+                  span.badge.bg-primary Male
+                - else
+                  span.badge.bg-danger Female
+          .card-body
+            .card-text.mb-2
+              strong Age: &nbsp;
+              | #{patient.age}
+            .card-text.mb-2
+              strong Birthdate: &nbsp;
+              | #{patient.date_of_birth}
+            - if patient.patient_records.present?
+              ul.list-group.list-group-flush
+                - patient.patient_records.each do |record|
+                  li.list-group-item
+                    i.fa.fa-heartbeat.me-2
+                    | Chest Pain Type: #{record.chest_pain_type.text}
+                    br
+                    i.fa.fa-tint.me-2
+                    | Resting BP: #{record.resting_blood_pressure} mmHg
+                    br
+                    i.fa.fa-apple-alt.me-2
+                    | Cholesterol: #{record.serum_cholesterol} mg/dL
+                    br
+                    i.fa.fa-bread-slice.me-2
+                    | Fasting Blood Sugar: #{record.fasting_blood_sugar} mg/dL
+                    br
+                    i.fa.fa-running.me-2
+                    | Max Heart Rate: #{record.max_heart_rate_achieved} bpm
+                    br
+                    i.fa.fa-exclamation-triangle.me-2
+                    | Angina Induced by Exercise: #{record.exercise_induced_angina ? 'Yes' : 'No'}
+                    br
+                    i.fa.fa-chart-line.me-2
+                    | ST Depression: #{record.st_depression} mm
+            - else
+              .alert.alert-warning Missing records.
+          .card-footer.bg-white
+            = link_to 'View Patient', patient_path(patient), class: 'btn btn-outline-primary btn-sm me-2'
+            - if patient.patient_records.blank?
+              = link_to 'Add Record', new_patient_record_path(patient), class: 'btn btn-primary btn-sm'

@@ -1,24 +1,28 @@
-= form_with(model: patient, local: true) do |form|
+= form_with(model: patient, local: true, class: 'card shadow-sm p-4') do |form|
   - if patient.errors.any?
-    #error_explanation
-      h2
-        = pluralize(patient.errors.count, "error")
-        |  prohibited this patient from being saved:
-    ul
-      - patient.errors.full_messages.each do |message|
-        li
-          = message
-  .field
-    = form.label :first_name
-    = form.text_field :first_name
-  .field
-    = form.label :last_name
-    = form.text_field :last_name
-  .field
-    = form.label :date_of_birth
-    = form.date_field :date_of_birth
-  .field
-    = form.label :sex
-    = form.select :sex, Patient.sex.options, {}
-  .actions
-    = form.submit
+    .alert.alert-danger role="alert"
+      h4.alert-heading
+        | #{pluralize(patient.errors.count, "error")} prohibited this patient from being saved:
+      ul
+        - patient.errors.full_messages.each do |message|
+          li = message
+
+  .form-group.mb-3
+    = form.label :first_name, class: 'form-label'
+    = form.text_field :first_name, class: 'form-control'
+
+  .form-group.mb-3
+    = form.label :last_name, class: 'form-label'
+    = form.text_field :last_name, class: 'form-control'
+
+  .form-group.mb-3
+    = form.label :date_of_birth, class: 'form-label'
+    = form.date_field :date_of_birth, class: 'form-control'
+
+  .form-group.mb-3
+    = form.label :sex, class: 'form-label'
+    = form.select :sex, Patient.sex.options, {}, class: 'form-select'
+
+  .form-group.text-center
+    = form.submit class: 'btn btn-primary'
+    = link_to 'Cancel', patients_path, class: 'btn btn-outline-secondary ms-2'

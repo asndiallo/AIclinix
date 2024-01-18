@@ -1,0 +1,27 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.sticky-top
+  .container
+    = link_to 'AIclinix', root_path, class: 'navbar-brand'
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        - if user_signed_in?
+          li.nav-item
+            = link_to 'Dashboard', root_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'Patients', patients_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'New Patient Record', new_patient_record_path, class: 'nav-link'
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle[href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+              | #{current_user.email}
+            ul.dropdown-menu.dropdown-menu-end[aria-labelledby="navbarDropdownMenuLink"]
+              li
+                = link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item'
+              li
+                = button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+        - else
+          li.nav-item
+            = link_to 'Login', new_user_session_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'

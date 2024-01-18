@@ -41,7 +41,11 @@ class PatientRecordsController < ApplicationController
   private
 
   def set_patient_record
-    @patient_record = PatientRecord.find(params[:id])
+    @patient_record = if params[:patient_id].nil?
+                        PatientRecord.find(params[:id])
+                      else
+                        PatientRecord.where(patient_id: params[:patient_id]).last
+                      end
   end
 
   def patient_record_params

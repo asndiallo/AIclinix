@@ -1,55 +1,57 @@
-h1
-  | Patient Details
-.patient-details
-  p
-    strong
-      | First Name:
-      | &nbsp;
-    = @patient.first_name
-  p
-    strong
-      | Last Name:
-      | &nbsp;
-    = @patient.last_name
-  p
-    strong
-      | Age:
-      | &nbsp;
-    = @patient.age
-    | &nbsp;
-    | years old
-  p
-    strong
-      | Date of Birth:
-      | &nbsp;
-    = @patient.date_of_birth
-  p
-    strong
-      | Gender:
-      | &nbsp;
-    = @patient.sex
-  p
-    strong
-      | Managed by:
-      | &nbsp;
-    = @patient.user.email
+.row
+  .col-12
+    h1.mb-4 Patient Details
 
-  - if @heart_disease_prediction
-    h2
-      | Heart Disease Prediction
-      span
-        | &nbsp; (last updated: &nbsp;
-        = time_ago_in_words(@heart_disease_prediction.created_at)
-        | &nbsp; ago)
-    p
-      strong
-        | Prediction:
-        | &nbsp;
-      = @heart_disease_prediction.prediction == 1 ? 'Likely' : 'Unlikely'
-    div data-controller="apex-chart" data-apex-chart-shap-data-value=@heart_disease_prediction.shap_values.to_json
+    .card.shadow-sm
+      .card-body
+        .row.mb-3
+          .col-md-6
+            p.card-text
+              strong First Name: 
+              | #{@patient.first_name}
+          .col-md-6
+            p.card-text
+              strong Last Name: 
+              | #{@patient.last_name}
 
-  = link_to 'Edit Patient', edit_patient_path(@patient)
-  |  | 
-  = link_to 'Patient Records', patient_records_path
-  |  |
-  = link_to 'Back to Patients', patients_path
+        .row.mb-3
+          .col-md-6
+            p.card-text
+              strong Age: 
+              | #{@patient.age} years old
+          .col-md-6
+            p.card-text
+              strong Date of Birth: 
+              | #{@patient.date_of_birth}
+
+        .row.mb-3
+          .col-md-6
+            p.card-text
+              strong Gender: 
+              | #{@patient.sex.text.capitalize}
+          .col-md-6
+            p.card-text
+              strong Managed by: 
+              | #{@patient.user.email}
+
+        - if @heart_disease_prediction
+          - prediction_status = @heart_disease_prediction.prediction == 1 ? 'Likely' : 'Unlikely'
+          - icon_class = @heart_disease_prediction.prediction == 0 ? 'fa-check-circle' : 'fa-times-circle'
+          - badge_class = @heart_disease_prediction.prediction == 0 ? 'bg-success' : 'bg-danger'
+          .alert.alert-info.mt-4
+            h5 Heart Disease Prediction
+            span.badge.bg-secondary.ms-2.me-2
+              = time_ago_in_words(@heart_disease_prediction.created_at)
+              | ago
+            span.badge[class=badge_class]
+              i.fa[class="fa #{icon_class} me-2"]
+              = prediction_status
+            div data-controller="apex-chart" data-apex-chart-shap-data-value=@heart_disease_prediction.shap_values.to_json
+
+        .d-flex.justify-content-between.mt-4
+          = link_to 'Edit Patient', edit_patient_path(@patient), class: 'btn btn-primary'
+          - if @patient.patient_records.any?
+            = link_to 'Patient Records', patient_record_path(patient_id: @patient.id), class: 'btn btn-secondary'
+          - else
+            = link_to 'New Patient Record', new_patient_record_path(patient_id: @patient.id), class: 'btn btn-secondary'
+          = link_to 'Back to Patients', patients_path, class: 'btn btn-outline-secondary'

@@ -1,55 +1,69 @@
-= form_with(model: patient_record, local: true) do |form|
+= form_with(model: patient_record, local: true, class: 'card shadow-sm p-4') do |form|
   - if patient_record.errors.any?
-    #error_explanation
-      h2
-        = pluralize(patient_record.errors.count, "error")
-        |  prohibited this patient record from being saved:
-    ul
-      - patient_record.errors.full_messages.each do |message|
-        li
-          = message
-  .field
-    = form.label :patient_id
-    = form.collection_select :patient_id, Patient.all, :id, :full_name
-  .field
-    = form.label :chest_pain_type
-    = form.select :chest_pain_type, PatientRecord.chest_pain_type.options, {}
-  .field
-    = form.label :resting_blood_pressure
-    = form.number_field :resting_blood_pressure, :step => "0.01"
-    |  mm Hg 
-  .field
-    = form.label :serum_cholesterol
-    = form.number_field :serum_cholesterol, :step => "0.01"
-    |  mg/dl 
-  .field
-    = form.label :fasting_blood_sugar
-    = form.number_field :fasting_blood_sugar, :step => "0.01"
-    |  mg/dl 
-  .field
-    = form.label :resting_ecg_results
-    = form.select :resting_ecg_results, PatientRecord.resting_ecg_results.options, {}
-  .field
-    = form.label :max_heart_rate_achieved
-    = form.number_field :max_heart_rate_achieved
-    |  bpm 
-  .field
-    = form.label :exercise_induced_angina
-    = form.check_box :exercise_induced_angina
-  .field
-    = form.label :st_depression
-    = form.number_field :st_depression, :step => "0.01"
-  .field
-    = form.label :st_slope
-    = form.select :st_slope, PatientRecord.st_slope.options, {}
-  .field
-    = form.label :number_colored_major_vessels
-    = form.number_field :number_colored_major_vessels
-  .field
-    = form.label :thalassemia
-    = form.select :thalassemia, PatientRecord.thalassemia.options, {}
-  div
-    = form.label :recorded_at
-    = form.date_field :recorded_at
-  .actions
-    = form.submit
+    .alert.alert-danger role="alert"
+      h4.alert-heading
+        | #{pluralize(patient_record.errors.count, "error")} prohibited this patient record from being saved:
+      ul
+        - patient_record.errors.full_messages.each do |message|
+          li = message
+
+  .form-group.mb-3
+    = form.label :patient_id, class: 'form-label'
+    = form.collection_select :patient_id, Patient.all, :id, :full_name, {}, { class: 'form-select' }
+
+  .form-group.mb-3
+    = form.label :chest_pain_type, class: 'form-label'
+    = form.select :chest_pain_type, PatientRecord.chest_pain_type.options, {}, { class: 'form-select' }
+
+  .form-group.mb-3
+    = form.label :resting_blood_pressure, class: 'form-label'
+    = form.number_field :resting_blood_pressure, step: "0.01", class: 'form-control'
+    small.form-text.text-muted mm Hg
+
+  .form-group.mb-3
+    = form.label :serum_cholesterol, class: 'form-label'
+    = form.number_field :serum_cholesterol, step: "0.01", class: 'form-control'
+    small.form-text.text-muted mg/dl
+
+  .form-group.mb-3
+    = form.label :fasting_blood_sugar, class: 'form-label'
+    = form.number_field :fasting_blood_sugar, step: "0.01", class: 'form-control'
+    small.form-text.text-muted mg/dl
+
+  .form-group.mb-3
+    = form.label :resting_ecg_results, class: 'form-label'
+    = form.select :resting_ecg_results, PatientRecord.resting_ecg_results.options, {}, { class: 'form-select' }
+
+  .form-group.mb-3
+    = form.label :max_heart_rate_achieved, class: 'form-label'
+    = form.number_field :max_heart_rate_achieved, class: 'form-control'
+    small.form-text.text-muted bpm
+
+  .form-group.mb-3
+    = form.label :exercise_induced_angina, class: 'form-check-label'
+    .form-check
+      = form.check_box :exercise_induced_angina, class: 'form-check-input'
+
+  .form-group.mb-3
+    = form.label :st_depression, class: 'form-label'
+    = form.number_field :st_depression, step: "0.01", class: 'form-control'
+
+  .form-group.mb-3
+    = form.label :st_slope, class: 'form-label'
+    = form.select :st_slope, PatientRecord.st_slope.options, {}, { class: 'form-select' }
+
+  .form-group.mb-3
+    = form.label :number_colored_major_vessels, class: 'form-label'
+    = form.number_field :number_colored_major_vessels, class: 'form-control'
+
+  .form-group.mb-3
+    = form.label :thalassemia, class: 'form-label'
+    = form.select :thalassemia, PatientRecord.thalassemia.options, {}, { class: 'form-select' }
+
+  .form-group.mb-3
+    = form.label :recorded_at, class: 'form-label'
+    = form.date_field :recorded_at, class: 'form-control'
+
+  .form-group.text-center
+    = form.submit class: 'btn btn-primary mt-3'
+    = link_to 'Cancel', patient_records_path, class: 'btn btn-outline-secondary ms-2 mt-3'

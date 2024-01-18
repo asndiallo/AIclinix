@@ -1,4 +1,5 @@
-h1
-  | New Patient
-  = render 'form', patient: @patient
-  = link_to 'Back', patients_path
+.row.justify-content-center
+  .col-md-6
+    h1.mb-4.text-center
+      | New Patient
+    = render 'form', patient: @patient
